@@ -9,7 +9,7 @@ const currentInput = {
   message: messageBox.value,
 };
 
-followStorage = () => {
+const followStorage = () => {
   const storedInput = localStorage.getItem('feedback-form-state');
   if (storedInput) {
     const { email, message } = JSON.parse(storedInput);

@@ -6,21 +6,22 @@ import { galleryItems } from './gallery-items';
 
 const galleryContainer = document.querySelector('.gallery');
 
-let listArray = [];
+const galleryMarkup = galleryItems
+  .map(item => {
+    return `<li>
+    <a class="gallery__item" href="${item.original}">
+    <img 
+    class="gallery__image" 
+    src="${item.preview}" 
+    alt="${item.description}" 
+    />
+  </a></li>`;
+  })
+  .join('');
 
-galleryItems.forEach(galleryItem => {
-  const listItem = document.createElement('li');
-  const innerString = `<a class="gallery__item" href="${galleryItem.original}">
-    <img class="gallery__image" src="${galleryItem.preview}" alt="${galleryItem.description}" />
-  </a>`;
-  listItem.insertAdjacentHTML('beforeend', innerString);
-  listArray.push(listItem);
-});
-galleryContainer.append(...listArray);
+galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
-let lightbox = new SimpleLightbox('.gallery a', {
+const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
-
-console.log(galleryItems);
